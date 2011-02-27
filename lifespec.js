@@ -21,7 +21,7 @@ describe("Conway's Game of Life", function () {
 	it("should be false if the number of living neighbors is not three", function () {
 	    var cell = {};
 	    function sprout(cell) {
-		return true;
+		return false;
 	    }
 	    expect(sprout(cell)).toBeFalsy();
 	});
