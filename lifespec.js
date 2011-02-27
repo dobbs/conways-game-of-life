@@ -33,7 +33,9 @@ describe("Conway's Game of Life", function () {
 	});
     });
     describe("fertile() knows which cells might sprout in the next generation", function () {
-	it("should return an empty set if this generation has no living cells");
+	it("should return an empty set if this generation has no living cells", function () {
+	    expect(fertile(generation)).toEqual([]);
+	});
 	it("should return all of the living cells in this generation");
 	it("should return all of the immediate neighbors of a living cell");
     });    
