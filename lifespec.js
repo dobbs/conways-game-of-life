@@ -50,9 +50,20 @@ describe("Conway's Game of Life", function () {
 	}
 	return sum;
     }
-    function sprout(cell) {
-	return cell.livingNeighbors == 3 ||
-	    (cell.livingNeighbors == 2 && cell.isAlive);
+    function sprout(cell, generation) {
+	var count = livingNeighbors(generation, cell);
+	if (count == 3) {
+	    return true;
+	} else if (count != 2) {
+	    return false;
+	}
+	var j = generation.length;
+	while (j--) {
+	    if (generation[j].join() == cell.join()) {
+		return true;
+	    }
+	}
+	return false;
     }
     describe("livingNeighbors(generation, cell)", function () {
 	it("should count the living neighbors of the cell in the given generation", function () {
