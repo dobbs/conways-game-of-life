@@ -10,7 +10,7 @@
 // Any live cell with more than three live neighbours dies, as if by overcrowding.
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 describe("Conway's Game of Life", function () {
-    describe("sprout", function () {
+    describe("sprout() knows if a cell will sprout life in the next generation", function () {
 	function sprout(cell) {
 	    return cell.livingNeighbors == 3 ||
 		(cell.livingNeighbors == 2 && cell.isAlive);
@@ -32,7 +32,9 @@ describe("Conway's Game of Life", function () {
 	    expect(sprout(cell)).toBeFalsy();
 	});
     });
-    describe("fertile", function () {
-	it("should test all living cells and all of their neighbors");
+    describe("fertile() knows which cells might sprout in the next generation", function () {
+	it("should return an empty set if this generation has no living cells");
+	it("should return all of the living cells in this generation");
+	it("should return all of the immediate neighbors of a living cell");
     });    
 });
