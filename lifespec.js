@@ -59,6 +59,19 @@ describe("Conway's Game of Life", function () {
     });
     describe("neighbors(cellCoordinates)", function () {
 	it("knows the coordinates of cell's neighbors", function () {
+	    function neighbors(cellCoordinates) {
+		var x = cellCoordinates[0];
+		var y = cellCoordinates[1];
+		var neighbors = [];
+		for (var xi = x-1; xi <= x+1; xi++) {
+		    for (var yi = y-1; yi <= y+1; yi++) {
+			if (xi != x || yi != y) {
+			    neighbors.push([xi, yi]);
+			}
+		    }
+		}
+		return neighbors;
+	    }
 	    expect(neighbors([1, 1]).sort()).toEqual(
 		[[0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]]);
 	});
