@@ -36,16 +36,22 @@ describe("Conway's Game of Life", function () {
 	});
 	return fertileCells;
     }
+    function findCell(cell, generation) {
+	var j = generation.length;
+	while (j--) {
+	    if (generation[j].join() == cell.join()) {
+		return true;
+	    }
+	}
+	return false;
+    }
     function livingNeighbors(generation, cell) {
 	var neighborCoords = neighbors(cell);
 	var i = neighborCoords.length;
 	var sum = 0;
 	while (i--) {
-	    var j = generation.length;
-	    while (j--) {
-		if (generation[j].join() == neighborCoords[i].join()) {
-		    sum++;
-		}
+	    if (findCell(neighborCoords[i], generation)) {
+		sum++;
 	    }
 	}
 	return sum;
