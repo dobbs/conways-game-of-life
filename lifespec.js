@@ -36,26 +36,26 @@ describe("Conway's Game of Life", function () {
 	});
 	return fertileCells;
     }
+    function livingNeighbors(generation, cell) {
+	var neighborCoords = neighbors(cell);
+	var i = neighborCoords.length;
+	var sum = 0;
+	while (i--) {
+	    var j = generation.length;
+	    while (j--) {
+		if (generation[j].join() == neighborCoords[i].join()) {
+		    sum++;
+		}
+	    }
+	}
+	return sum;
+    }
     function sprout(cell) {
 	return cell.livingNeighbors == 3 ||
 	    (cell.livingNeighbors == 2 && cell.isAlive);
     }
     describe("livingNeighbors(generation, cell)", function () {
 	it("should count the living neighbors of the cell in the given generation", function () {
-	    function livingNeighbors(generation, cell) {
-		var neighborCoords = neighbors(cell);
-		var i = neighborCoords.length;
-		var sum = 0;
-		while (i--) {
-		    var j = generation.length;
-		    while (j--) {
-			if (generation[j].join() == neighborCoords[i].join()) {
-			    sum++;
-			}
-		    }
-		}
-		return sum;
-	    }
 	    var generation = [[0,0], [0, 1], [0,2]];
 	    expect(livingNeighbors(generation, generation[0])).toEqual(1);
 	    expect(livingNeighbors(generation, generation[1])).toEqual(2);
