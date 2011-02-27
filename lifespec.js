@@ -47,7 +47,24 @@ describe("Conway's Game of Life", function () {
     });
     describe("fertileCellsFrom(generation) knows where to look for sprouts", function () {
 	function fertileCellsFrom(generation) {
-	    return generation;
+	    var i = generation.length;
+	    var fertileCells = [];
+	    var seen = {};
+	    while (i--) {
+		var cell = generation[i];
+		if (! seen[cell.join()]) {
+		    fertileCells.push(cell);
+		}
+		var neighborsCoords = neighbors(cell);
+		var j = neighborsCoords.length;
+		while (j--) {
+		    var coords = neighborsCoords[j];
+		    if (! seen[coords.join()]++) {
+			fertileCells.push(coords);
+		    }
+		}
+	    }
+	    return fertileCells;
 	}
 	it("should return an empty set if this generation has no living cells", function () {
 	    var generation = [];
