@@ -34,6 +34,7 @@ describe("Conway's Game of Life", function () {
     });
     describe("fertileCellsFrom(generation) knows where to look for sprouts", function () {
 	function fertileCellsFrom(generation) {
+	    return [];
 	}
 	it("should return an empty set if this generation has no living cells", function () {
 	    var generation;
