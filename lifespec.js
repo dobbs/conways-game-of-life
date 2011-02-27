@@ -23,11 +23,24 @@ describe("Conway's Game of Life", function () {
 	}
 	return neighbors;
     }
+    function fertileCellsFrom(generation) {
+	var seen = {};
+	var fertileCells = [];
+	function pushUnique(arr, cell) {if (! seen[cell.join()]) {fertileCells.push(cell);}}
+	function each(arr, fn) {var i = arr.length; while (i--) {fn.apply(arr[i]);}}
+	each(generation, function () {
+	    pushUnique(fertileCells, this);
+	    each(neighbors(this), function () {
+		pushUnique(fertileCells, this)
+	    });
+	});
+	return fertileCells;
+    }
+    function sprout(cell) {
+	return cell.livingNeighbors == 3 ||
+	    (cell.livingNeighbors == 2 && cell.isAlive);
+    }
     describe("sprout(cell) knows if a cell will sprout life in the next generation", function () {
-	function sprout(cell) {
-	    return cell.livingNeighbors == 3 ||
-		(cell.livingNeighbors == 2 && cell.isAlive);
-	}
 	it("should be true if the number of living neighbors is three", function () {
 	    var cell = {livingNeighbors: 3};
 	    expect(sprout(cell)).toBeTruthy();
@@ -46,19 +59,6 @@ describe("Conway's Game of Life", function () {
 	});
     });
     describe("fertileCellsFrom(generation) knows where to look for sprouts", function () {
-	function fertileCellsFrom(generation) {
-	    var seen = {};
-	    var fertileCells = [];
-	    function pushUnique(arr, cell) {if (! seen[cell.join()]) {fertileCells.push(cell);}}
-	    function each(arr, fn) {var i = arr.length; while (i--) {fn.apply(arr[i]);}}
-	    each(generation, function () {
-		pushUnique(fertileCells, this);
-		each(neighbors(this), function () {
-		    pushUnique(fertileCells, this)
-		});
-	    });
-	    return fertileCells;
-	}
 	it("should return an empty set if this generation has no living cells", function () {
 	    var generation = [];
 	    expect(fertileCellsFrom(generation)).toEqual([]);
