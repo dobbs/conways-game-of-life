@@ -22,7 +22,10 @@ describe("Conway's Game of Life", function () {
 	    var cell = {livingNeighbors: 4};
 	    expect(sprout(cell)).toBeFalsy();
 	});
-	it("should be true if I and two neighbors are alive");
+	it("should be true if I and two neighbors are alive", function () {
+	    var cell = {livingNeighbors: 2, isAlive: true};
+	    expect(sprout(cell)).toBeTruthy();
+	});
     });
     describe("fertile", function () {
 	it("should test all living cells and all of their neighbors");
