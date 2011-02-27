@@ -64,12 +64,7 @@ describe("Conway's Game of Life", function () {
 	    return false;
 	}
 	var j = generation.length;
-	while (j--) {
-	    if (generation[j].join() == cell.join()) {
-		return true;
-	    }
-	}
-	return false;
+	return findCell(cell, generation);
     }
     describe("livingNeighbors(generation, cell)", function () {
 	it("should count the living neighbors of the cell in the given generation", function () {
