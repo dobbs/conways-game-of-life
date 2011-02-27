@@ -40,6 +40,13 @@ describe("Conway's Game of Life", function () {
 	return cell.livingNeighbors == 3 ||
 	    (cell.livingNeighbors == 2 && cell.isAlive);
     }
+    describe("livingNeighbors(generation, cell)", function () {
+	it("should count the living neighbors of the cell in the given generation", function () {
+	    var generation = [[0,0], [0, 1], [0,2]];
+	    expect(livingNeighbors(generation, generation[0])).toEqual(1);
+	    expect(livingNeighbors(generation, generation[1])).toEqual(2);
+	});
+    });
     describe("sprout(cell) knows if a cell will sprout life in the next generation", function () {
 	it("should be true if the number of living neighbors is three", function () {
 	    var cell = {livingNeighbors: 3};
