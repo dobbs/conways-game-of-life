@@ -18,6 +18,13 @@ describe("Conway's Game of Life", function () {
 	    }
 	    expect(sprout(cell)).toBeTruthy();
 	});
+	it("should be false if the number of living neighbors is not three", function () {
+	    var cell = {};
+	    function sprout(cell) {
+		return true;
+	    }
+	    expect(sprout(cell)).toBeFalsy();
+	});
 	it("should be true if I and two neighbors are alive");
     });
     describe("fertile", function () {
