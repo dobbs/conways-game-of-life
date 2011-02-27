@@ -56,5 +56,7 @@ describe("Conway's Game of Life", function () {
 		expect(actualCells).toContain(expectedCells[i]);
 	    }
 	});
-    });    
+    });
+    describe("neighbors(cell) knows the coordinates of the neighbors of a cell", function () {
+    });
 });
