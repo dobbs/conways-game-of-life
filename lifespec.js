@@ -11,18 +11,14 @@
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 describe("Conway's Game of Life", function () {
     describe("sprout", function () {
+	var cell = {};
+	function sprout(cell) {
+	    return true;
+	}
 	it("should be true if the number of living neighbors is three", function () {
-	    var cell = {};
-	    function sprout(cell) {
-		return true;
-	    }
 	    expect(sprout(cell)).toBeTruthy();
 	});
 	it("should be false if the number of living neighbors is not three", function () {
-	    var cell = {};
-	    function sprout(cell) {
-		return false;
-	    }
 	    expect(sprout(cell)).toBeFalsy();
 	});
 	it("should be true if I and two neighbors are alive");
