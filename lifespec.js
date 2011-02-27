@@ -10,4 +10,11 @@
 // Any live cell with more than three live neighbours dies, as if by overcrowding.
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 describe("Conway's Game of Life", function () {
+    describe("sprout", function () {
+	it("should be true if the number of living neighbors is three");
+	it("should be true if I and two neighbors are alive");
+    });
+    describe("fertile", function () {
+	it("should test all living cells and all of their neighbors");
+    });    
 });
