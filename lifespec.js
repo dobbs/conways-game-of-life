@@ -61,22 +61,19 @@ describe("Conway's Game of Life", function () {
 	    expect(livingNeighbors(generation, generation[1])).toEqual(2);
 	});
     });
-    describe("sprout(cell) knows if a cell will sprout life in the next generation", function () {
+    describe("sprout(cell, generation) knows if a cell will sprout life in the next generation", function () {
+	var generation = [[1,0], [1,1], [1,2], [0,0]];
 	it("should be true if the number of living neighbors is three", function () {
-	    var cell = {livingNeighbors: 3};
-	    expect(sprout(cell)).toBeTruthy();
+	    expect(sprout([2,1], generation)).toBeTruthy();
 	});
 	it("should be false if the number of living neighbors is not three", function () {
-	    var cell = {livingNeighbors: 4};
-	    expect(sprout(cell)).toBeFalsy();
+	    expect(sprout([0,1], generation)).toBeFalsy();
 	});
 	it("should be true if I and two neighbors are alive", function () {
-	    var cell = {livingNeighbors: 2, isAlive: true};
-	    expect(sprout(cell)).toBeTruthy();
+	    expect(sprout([1,0], generation)).toBeTruthy();
 	});
 	it("should be false if two neighbors are alive but I am not", function () {
-	    var cell = {livingNeighbors: 2};
-	    expect(sprout(cell)).toBeFalsy();
+	    expect(sprout([2,0], generation)).toBeFalsy();
 	});
     });
     describe("fertileCellsFrom(generation) knows where to look for sprouts", function () {
