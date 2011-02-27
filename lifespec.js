@@ -48,7 +48,7 @@ describe("Conway's Game of Life", function () {
 	    }
 	    expect(fertileCellsFrom(generation)).toEqual(generation);
 	});
-	it("should include coordinates of the immediate neighbors of a living cell", function () {
+	xit("should include coordinates of the immediate neighbors of a living cell", function () {
 	    var generation = [[1,1]];
 	    var expectedCells = [[0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]];
 	    var actualCells = fertileCellsFrom(generation);
@@ -57,6 +57,10 @@ describe("Conway's Game of Life", function () {
 	    }
 	});
     });
-    describe("neighbors(cell) knows the coordinates of the neighbors of a cell", function () {
+    describe("neighbors(cellCoordinates)", function () {
+	it("knows the coordinates of cell's neighbors", function () {
+	    expect(neighbors([1, 1]).sort()).toEqual(
+		[[0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]]);
+	});
     });
 });
