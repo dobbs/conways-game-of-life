@@ -34,14 +34,14 @@ describe("Conway's Game of Life", function () {
     });
     describe("fertileCellsFrom(generation) knows where to look for sprouts", function () {
 	function fertileCellsFrom(generation) {
-	    return [];
+	    return generation;
 	}
 	it("should return an empty set if this generation has no living cells", function () {
-	    var generation;
+	    var generation = [];
 	    expect(fertileCellsFrom(generation)).toEqual([]);
 	});
 	it("should return all of the living cells in this generation", function () {
-	    var generation = [[0, 0]]
+	    var generation = [[0, 0]];
 	    expect(fertileCellsFrom(generation)).toEqual(generation);
 	});
 	it("should return all of the immediate neighbors of a living cell");
