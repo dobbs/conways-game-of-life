@@ -14,14 +14,14 @@ describe("Conway's Game of Life", function () {
 	it("should be true if the number of living neighbors is three", function () {
 	    var cell = {livingNeighbors: 3};
 	    function sprout(cell) {
-		return true;
+		return cell.livingNeighbors == 3;
 	    }
 	    expect(sprout(cell)).toBeTruthy();
 	});
 	it("should be false if the number of living neighbors is not three", function () {
 	    var cell = {livingNeighbors: 4};
 	    function sprout(cell) {
-		return false;
+		return cell.livingNeighbors == 3;
 	    }
 	    expect(sprout(cell)).toBeFalsy();
 	});
