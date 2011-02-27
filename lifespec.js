@@ -40,7 +40,10 @@ describe("Conway's Game of Life", function () {
 	    var generation;
 	    expect(fertileCellsFrom(generation)).toEqual([]);
 	});
-	it("should return all of the living cells in this generation");
+	it("should return all of the living cells in this generation", function () {
+	    var generation = [[0, 0]]
+	    expect(fertileCellsFrom(generation)).toEqual(generation);
+	});
 	it("should return all of the immediate neighbors of a living cell");
     });    
 });
