@@ -34,6 +34,7 @@ describe("Conway's Game of Life", function () {
     });
     describe("fertileCellsFrom(generation) knows where to look for sprouts", function () {
 	it("should return an empty set if this generation has no living cells", function () {
+	    var generation;
 	    expect(fertileCellsFrom(generation)).toEqual([]);
 	});
 	it("should return all of the living cells in this generation");
