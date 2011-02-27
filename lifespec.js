@@ -59,11 +59,10 @@ describe("Conway's Game of Life", function () {
 	    for (var i in generation) {
 		expect(actualCells).toContain(generation[i]);
 	    }
-	    expect(fertileCellsFrom(generation)).toEqual(generation);
 	});
-	xit("should include coordinates of the immediate neighbors of a living cell", function () {
+	it("should include coordinates of the immediate neighbors of a living cell", function () {
 	    var generation = [[1,1]];
-	    var expectedCells = [[0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]];
+	    var expectedCells = neighbors(generation[0]);
 	    var actualCells = fertileCellsFrom(generation);
 	    for (var i in expectedCells) {
 		expect(actualCells).toContain(expectedCells[i]);
