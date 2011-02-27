@@ -12,7 +12,8 @@
 describe("Conway's Game of Life", function () {
     describe("sprout", function () {
 	function sprout(cell) {
-	    return cell.livingNeighbors == 3;
+	    return cell.livingNeighbors == 3 ||
+		(cell.livingNeighbors == 2 && cell.isAlive);
 	}
 	it("should be true if the number of living neighbors is three", function () {
 	    var cell = {livingNeighbors: 3};
