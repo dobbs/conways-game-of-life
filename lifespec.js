@@ -12,6 +12,7 @@
 describe("Conway's Game of Life", function () {
     describe("sprout", function () {
 	it("should be true if the number of living neighbors is three", function () {
+	    var cell;
 	    expect(sprout(cell)).toBeTruthy();
 	});
 	it("should be true if I and two neighbors are alive");
