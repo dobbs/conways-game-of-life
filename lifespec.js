@@ -45,14 +45,10 @@ describe("Conway's Game of Life", function () {
 	return fertileCells;
     }
     function livingNeighbors(generation, cell) {
-	var neighborCoords = neighbors(cell);
-	var i = neighborCoords.length;
 	var sum = 0;
-	while (i--) {
-	    if (findCell(neighborCoords[i], generation)) {
-		sum++;
-	    }
-	}
+	each(neighbors(cell), function () {
+	    if (findCell(this, generation)) {sum++;}
+	});
 	return sum;
     }
     function sprout(cell, generation) {
