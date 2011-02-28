@@ -66,6 +66,10 @@ describe("Conway's Game of Life", function () {
     }
     function tick(generation) {
 	var nextGeneration = [];
+	var pushUnique = uniquePusherFor(nextGeneration);
+	each(fertileCellsFrom(generation), function () {
+	    if(sprout(this, generation)) {pushUnique(this);}
+	});
 	return nextGeneration;
     }
     describe("tick()", function () {
