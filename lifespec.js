@@ -64,6 +64,17 @@ describe("Conway's Game of Life", function () {
 	var j = generation.length;
 	return findCell(cell, generation);
     }
+    describe("tick()", function () {
+	it("should return a block when given a block", function () {
+	    var BLOCK = [[0,0], [0,1], [1,0], [1,1]];
+	    expect(tick(BLOCK).sort()).toEqual(BLOCK.sort());
+	});
+	it("should return a VERTICAL_BLINKER when given a HORIZONTAL_BLINKER", function () {
+	    var VERTICAL_BLINKER = [[1,0], [1,1], [1,2]];
+	    var HORIZONTAL_BLINKER = [[0,1], [1,1], [2, 1]];
+	    expect(tick(VERTICAL_BLINKER).sort()).toEqual(HORIZONTAL_BLINKER.sort());
+	});
+    });
     describe("uniqePusherFor", function () {
 	it("should return a function", function () {
 	    expect(typeof uniquePusherFor([])).toEqual('function');
