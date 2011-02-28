@@ -64,6 +64,10 @@ describe("Conway's Game of Life", function () {
 	var j = generation.length;
 	return findCell(cell, generation);
     }
+    function tick(generation) {
+	var nextGeneration = [];
+	return nextGeneration;
+    }
     describe("tick()", function () {
 	it("should return a block when given a block", function () {
 	    var BLOCK = [[0,0], [0,1], [1,0], [1,1]];
