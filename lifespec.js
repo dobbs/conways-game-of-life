@@ -23,11 +23,11 @@ describe("Conway's Game of Life", function () {
 	}
 	return neighbors;
     }
+    function each(arr, fn) {var i = arr.length; while (i--) {fn.apply(arr[i]);}}
     function fertileCellsFrom(generation) {
 	var seen = {};
 	var fertileCells = [];
 	function pushUnique(arr, cell) {if (! seen[cell.join()]) {fertileCells.push(cell);}}
-	function each(arr, fn) {var i = arr.length; while (i--) {fn.apply(arr[i]);}}
 	each(generation, function () {
 	    pushUnique(fertileCells, this);
 	    each(neighbors(this), function () {
