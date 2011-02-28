@@ -9,7 +9,6 @@
 // Any live cell with two or three live neighbours lives on to the next generation.
 // Any live cell with more than three live neighbours dies, as if by overcrowding.
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
-describe("Conway's Game of Life", function () {
     function neighbors(cellCoordinates) {
 	var x = cellCoordinates[0];
 	var y = cellCoordinates[1];
@@ -72,6 +71,7 @@ describe("Conway's Game of Life", function () {
 	});
 	return nextGeneration;
     }
+describe("Conway's Game of Life", function () {
     describe("tick()", function () {
 	it("should return a block when given a block", function () {
 	    var BLOCK = [[0,0], [0,1], [1,0], [1,1]];
