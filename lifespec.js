@@ -29,13 +29,11 @@ describe("Conway's Game of Life", function () {
 	return function (cell) {if (! seen[cell.join()]++) {arr.push(cell);}}
     }
     function findCell(cell, generation) {
-	var j = generation.length;
-	while (j--) {
-	    if (generation[j].join() == cell.join()) {
-		return true;
-	    }
-	}
-	return false;
+	var result = false;
+	each(generation, function () {
+	    if (this.join() == cell.join()) {result = true;}
+	});
+	return result;
     }
     function fertileCellsFrom(generation) {
 	var fertileCells = [];
