@@ -26,7 +26,10 @@ describe("Conway's Game of Life", function () {
     function each(arr, fn) {var i = arr.length; while (i--) {fn.apply(arr[i]);}}
     function uniquePusherFor(arr) {
 	var seen = {};
-	return function (cell) {if (! seen[cell.join()]++) {arr.push(cell);}}
+	return function (cell) {
+	    if (!seen[cell.join()]) {arr.push(cell);}
+	    seen[cell.join()] = 1;
+	}
     }
     function findCell(cell, generation) {
 	var result = false;
