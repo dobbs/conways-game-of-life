@@ -61,6 +61,27 @@ describe("Conway's Game of Life", function () {
 	var j = generation.length;
 	return findCell(cell, generation);
     }
+    describe("uniqePusherFor", function () {
+	it("should return a function", function () {
+	    expect(typeof uniquePusherFor([])).toEqual('function');
+	});
+	it("should return a pusher that appends to the given array", function () {
+	    var arr = [];
+	    var pushUnique = uniquePusherFor(arr);
+	    pushUnique([1,1]);
+	    expect(arr.sort()).toEqual([[1,1]]);
+	    pushUnique([0,0]);
+	    expect(arr.sort()).toEqual([[0,0], [1,1]]);
+	});
+	it("should return a pusher that ignores duplicates", function () {
+	    var arr = [];
+	    var pushUnique = uniquePusherFor(arr);
+	    pushUnique([0,0]);
+	    expect(arr).toEqual([[0,0]]);
+	    pushUnique([0,0]);
+	    expect(arr).toEqual([[0,0]]);
+	});
+    });
     describe("findCell(cell, generation)", function () {
 	it("should return true if the given cell is alive in the generation", function () {
 	    expect(findCell([0,0], [[1,1], [2,2], [0,0]])).toBeTruthy();
