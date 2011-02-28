@@ -66,6 +66,14 @@ describe("Conway's Game of Life", function () {
 	var j = generation.length;
 	return findCell(cell, generation);
     }
+    describe("findCell(cell, generation)", function () {
+	it("should return true if the given cell is alive in the generation", function () {
+	    expect(findCell([0,0], [[1,1], [2,2], [0,0]])).toBeTruthy();
+	});
+	it("should return false if the given cell is not alive in the generation", function () {
+	    expect(findCell([0,0], [[1,1], [2,2]])).toBeFalsy();
+	});
+    });
     describe("livingNeighbors(generation, cell)", function () {
 	it("should count the living neighbors of the cell in the given generation", function () {
 	    var generation = [[0,0], [0, 1], [0,2]];
