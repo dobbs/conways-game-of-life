@@ -28,15 +28,6 @@ describe("Conway's Game of Life", function () {
 	var seen = {};
 	return function (cell) {if (! seen[cell.join()]++) {arr.push(cell);}}
     }
-    function fertileCellsFrom(generation) {
-	var fertileCells = [];
-	var pushUnique = uniquePusherFor(fertileCells);
-	each(generation, function () {
-	    pushUnique(this);
-	    each(neighbors(this), function () {pushUnique(this)});
-	});
-	return fertileCells;
-    }
     function findCell(cell, generation) {
 	var j = generation.length;
 	while (j--) {
@@ -45,6 +36,15 @@ describe("Conway's Game of Life", function () {
 	    }
 	}
 	return false;
+    }
+    function fertileCellsFrom(generation) {
+	var fertileCells = [];
+	var pushUnique = uniquePusherFor(fertileCells);
+	each(generation, function () {
+	    pushUnique(this);
+	    each(neighbors(this), function () {pushUnique(this)});
+	});
+	return fertileCells;
     }
     function livingNeighbors(generation, cell) {
 	var neighborCoords = neighbors(cell);
