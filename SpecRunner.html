@@ -4,6 +4,7 @@
 <head>
   <title>Jasmine Test Runner</title>
   <link rel="stylesheet" type="text/css" href="lib/jasmine-1.0.1/jasmine.css">
+  <style type="text/css">canvas {border: 1pt solid black;}</style>
   <script type="text/javascript" src="lib/jasmine-1.0.1/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.0.1/jasmine-html.js"></script>
 
@@ -17,5 +18,33 @@
   jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
   jasmine.getEnv().execute();
 </script>
+
+<canvas id="life" width="400" height="400"></canvas>
+
+<script type="text/javascript">
+var canvas = document.getElementById('life');
+var ctx = canvas.getContext('2d');
+function cell(x,y) {
+  ctx.beginPath();
+  ctx.rect(x*5,y*5,5,5);
+  ctx.closePath();
+  ctx.fill();
+}
+function clear() {
+  ctx.clearRect(0, 0, canvas.width,canvas.height);
+}
+
+var GLIDER = [[0,2], [1,2], [2,2], [2,1], [1,0]];
+var generation = GLIDER;
+var limit = 300;
+(function render() {
+    clear();
+    each(generation, function () {cell(this[0], this[1]);});
+    generation = tick(generation);
+    if (limit--) {setTimeout(render, 50)};
+})();
+
+</script>
+
 </body>
 </html>
