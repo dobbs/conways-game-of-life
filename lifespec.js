@@ -55,13 +55,7 @@
     }
     function sprout(cell, generation) {
 	var count = livingNeighbors(generation, cell);
-	if (count == 3) {
-	    return true;
-	} else if (count != 2) {
-	    return false;
-	}
-	var j = generation.length;
-	return findCell(cell, generation);
+	return (count == 3) || (count == 2 && findCell(cell, generation))
     }
     function tick(generation) {
 	var nextGeneration = [];
