@@ -10,19 +10,12 @@
 // Any live cell with more than three live neighbours dies, as if by overcrowding.
 // Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
     function neighbors(cellCoordinates) {
-	var x = cellCoordinates[0];
-	var y = cellCoordinates[1];
-	var neighbors = [];
-	for (var xi = x-1; xi <= x+1; xi++) {
-	    for (var yi = y-1; yi <= y+1; yi++) {
-		if (xi != x || yi != y) {
-		    neighbors.push([xi, yi]);
-		}
-	    }
-	}
-	return neighbors;
+	var x = cellCoordinates[0], y = cellCoordinates[1];
+	return [x-1,x,x+1].map(function(m) {
+	    var row = [y-1,y,y+1].map(function(n) {return [m,n];});
+	    return m == x ? row.filter(function(q) {return q[1] != y}) : row;
+	}).reduce(function (a, b) {return a.concat(b)}, []);
     }
-    function each(arr, fn) {var i = arr.length; while (i--) {fn.apply(arr[i]);}}
     function uniquePusherFor(arr) {
 	var seen = {};
 	return function (cell) {
@@ -32,24 +25,24 @@
     }
     function findCell(cell, generation) {
 	var result = false;
-	each(generation, function () {
-	    if (this.join() == cell.join()) {result = true;}
+	generation.map(function (address) {
+	    if (address.join() == cell.join()) {result = true;}
 	});
 	return result;
     }
     function fertileCellsFrom(generation) {
 	var fertileCells = [];
 	var pushUnique = uniquePusherFor(fertileCells);
-	each(generation, function () {
-	    pushUnique(this);
-	    each(neighbors(this), function () {pushUnique(this)});
+	generation.map(function (address) {
+	    pushUnique(address);
+	    (neighbors(address)).map(function (neighbor) {pushUnique(neighbor)});
 	});
 	return fertileCells;
     }
     function livingNeighbors(generation, cell) {
 	var sum = 0;
-	each(neighbors(cell), function () {
-	    if (findCell(this, generation)) {sum++;}
+	neighbors(cell).map(function (address) {
+	    if (findCell(address, generation)) {sum++;}
 	});
 	return sum;
     }
@@ -60,8 +53,8 @@
     function tick(generation) {
 	var nextGeneration = [];
 	var pushUnique = uniquePusherFor(nextGeneration);
-	each(fertileCellsFrom(generation), function () {
-	    if(sprout(this, generation)) {pushUnique(this);}
+	(fertileCellsFrom(generation)).map(function (address) {
+	    if(sprout(address, generation)) {pushUnique(address);}
 	});
 	return nextGeneration;
     }

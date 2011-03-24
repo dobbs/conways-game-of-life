@@ -39,7 +39,7 @@ var generation = GLIDER;
 var limit = 300;
 (function render() {
     clear();
-    each(generation, function () {cell(this[0], this[1]);});
+    generation.map(function (address) {cell(address[0], address[1]);});
     generation = tick(generation);
     if (limit--) {setTimeout(render, 50)};
 })();
