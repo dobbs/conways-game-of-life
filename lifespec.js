@@ -34,6 +34,31 @@ function tick(generation) {
         return count == 3 || (count == 2 && alive[address.join()]);
     });
 }
+function createCanvas(width, height) {
+    var canvas = document.createElement("canvas");
+    canvas.setAttribute("width", width);
+    canvas.setAttribute("height", height);
+    
+    return canvas;
+}
+function renderGenerations(generation, context, options) {
+    if (typeof options === "undefined") {options = {}}
+    var cellsize = options["cellsize"] || 50;
+    var limit = (typeof options["limit"] === "undefined") ? 20 : options["limit"];
+    var timeout = options["timeout"] || 200;
+    function cell(x,y) {
+	context.beginPath();
+	context.arc(cellsize/2+x*cellsize,cellsize/2+y*cellsize,cellsize/2.2,0,Math.PI*2);
+	context.closePath();
+	context.fill();
+    }
+    (function render() {
+	context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+	generation.map(function (address) {cell(address[0], address[1]);});
+	generation = tick(generation);
+	if (limit--) {setTimeout(render, timeout)};
+    })();
+}
 describe("Conway's Game of Life", function () {
     describe("tick()", function () {
         it("should return a block when given a block", function () {
@@ -51,5 +76,34 @@ describe("Conway's Game of Life", function () {
             expect(neighbors([1, 1]).sort()).toEqual(
                 [[0,0], [0,1], [0,2], [1,0], [1,2], [2,0], [2,1], [2,2]]);
         });
+    });
+    describe("createCanvas(width, height)", function () {
+	it("should return a new canvas element", function () {
+	    var canvas = createCanvas(500, 400);
+	    expect(canvas.tagName).toEqual("CANVAS");
+	    expect(canvas.getAttribute("width")).toEqual("500");
+	    expect(canvas.getAttribute("height")).toEqual("400");
+	});
+	
+    });
+    describe("renderGenerations(generation, context, options)", function () {
+	it("should draw the given generation on the given context when limit=0", function () {
+	    var context = jasmine.createSpyObj('context', [
+		'beginPath',
+		'closePath',
+		'arc',
+		'fill',
+		'clearRect',
+	    ]);
+	    context.canvas = { width: 300, height: 400};
+
+	    renderGenerations([[0,0],[0,1]], context);
+
+	    expect(context.beginPath).toHaveBeenCalled();
+	    expect(context.arc).toHaveBeenCalled();
+	    expect(context.closePath).toHaveBeenCalled();
+	    expect(context.fill).toHaveBeenCalled();
+	    expect(context.clearRect).toHaveBeenCalledWith(0,0,300,400);
+	});
     });
 });

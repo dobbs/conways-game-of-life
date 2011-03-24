@@ -19,30 +19,14 @@
   jasmine.getEnv().execute();
 </script>
 
-<canvas id="life" width="400" height="400"></canvas>
-
 <script type="text/javascript">
-var canvas = document.getElementById('life');
-var ctx = canvas.getContext('2d');
-function cell(x,y) {
-  ctx.beginPath();
-  ctx.rect(x*5,y*5,5,5);
-  ctx.closePath();
-  ctx.fill();
-}
-function clear() {
-  ctx.clearRect(0, 0, canvas.width,canvas.height);
-}
+
+var canvas = createCanvas(400, 400);
+document.body.appendChild(canvas);
 
 var GLIDER = [[0,2], [1,2], [2,2], [2,1], [1,0]];
 var generation = GLIDER;
-var limit = 300;
-(function render() {
-    clear();
-    generation.map(function (address) {cell(address[0], address[1]);});
-    generation = tick(generation);
-    if (limit--) {setTimeout(render, 50)};
-})();
+renderGenerations(generation, canvas.getContext('2d'));
 
 </script>
 
