@@ -14,3 +14,6 @@ small steps so I will have an example I can refer to when I want to
 explain test driven development.
 
 -Eric
+
+<script type="text/javascript" src="life.js"></script>
+<script type="text/javascript">demo()</script>
