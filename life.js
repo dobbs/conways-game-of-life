@@ -48,3 +48,14 @@ function renderGenerations(generation, context, options) {
         if (limit--) {setTimeout(render, timeout)};
     })();
 }
+var patterns = {
+    glider: [[0,2], [1,2], [2,2], [2,1], [1,0]],
+    block: [[0,0], [0,1], [1,0], [1,1]],
+    vertical_blinker: [[1,0], [1,1], [1,2]],
+    horizontal_blinker: [[0,1], [1,1], [2, 1]],
+};
+function demo() {
+    var canvas = createCanvas(400, 400);
+    document.body.appendChild(canvas);
+    renderGenerations(patterns.glider, canvas.getContext('2d'));
+}
